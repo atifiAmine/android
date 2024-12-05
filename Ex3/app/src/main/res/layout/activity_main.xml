@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <!-- Titre de l'application -->
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Exercice3"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textColor="#000000"
+        android:padding="16dp" />
+
+    <!-- FrameLayout pour changer l'arrière-plan avec l'image -->
+    <FrameLayout
+        android:id="@+id/myLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <!-- Cet espace est pour afficher l'image de la LED -->
+    </FrameLayout>
+
+    <!-- Bouton pour allumer la lumière (image de LED allumée) -->
+
+    <!-- Bouton pour éteindre la lumière (image de LED éteinte) -->
+</LinearLayout>
