@@ -4,12 +4,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:background="#5E34AA"
+        android:text="Exercice1"
+        android:gravity="center"
+        android:textColor="#FFFFFF" />
+
     <!-- FrameLayout pour changer la couleur de fond -->
     <FrameLayout
         android:id="@+id/myLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"> <!-- Prend l'espace restant -->
+
     </FrameLayout>
 
     <!-- Boutons pour changer la couleur -->
@@ -17,18 +27,21 @@
         android:id="@+id/buttonBleu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="#1633D8"
         android:text="Bleu" />
 
     <Button
         android:id="@+id/buttonVert"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="#1D8A21"
         android:text="Vert" />
 
     <Button
         android:id="@+id/buttonRouge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="#AA1010"
         android:text="Rouge" />
 
 </LinearLayout>
