@@ -1,11 +1,10 @@
 package com.example.exercice1
 
-import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Gravity
 import android.widget.Button
-import android.widget.RelativeLayout
+import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
@@ -14,18 +13,17 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnRouge: Button
     private lateinit var btnVert: Button
     private lateinit var btnBleu: Button
-    private lateinit var myLayout: RelativeLayout
+    private lateinit var myLayout: FrameLayout
 
-    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout)
 
-        // Initialisation des boutons et du RelativeLayout
+        // Initialisation des boutons et du FrameLayout
         btnBleu = findViewById(R.id.buttonBleu)
         btnVert = findViewById(R.id.buttonVert)
         btnRouge = findViewById(R.id.buttonRouge)
-        myLayout = findViewById(R.id.myLayout)  // Initialize the RelativeLayout
+        myLayout = findViewById(R.id.myLayout)
 
         // Actions des boutons
         btnBleu.setOnClickListener {

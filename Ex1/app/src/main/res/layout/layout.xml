@@ -4,35 +4,31 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <!-- FrameLayout pour changer la couleur de fond -->
+    <FrameLayout
+        android:id="@+id/myLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="0dp"
+        android:layout_weight="1"> <!-- Prend l'espace restant -->
+    </FrameLayout>
 
-        <FrameLayout
-            android:id="@+id/myLayout"
-            android:layout_width="match_parent"
-            android:layout_height="190dp">
+    <!-- Boutons pour changer la couleur -->
+    <Button
+        android:id="@+id/buttonBleu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bleu" />
 
-        </FrameLayout>
+    <Button
+        android:id="@+id/buttonVert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Vert" />
 
-        <Button
-            android:id="@+id/buttonBleu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button" />
-
-        <Button
-            android:id="@+id/buttonVert"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button" />
-
-        <Button
-            android:id="@+id/buttonRouge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button" />
-    </LinearLayout>
+    <Button
+        android:id="@+id/buttonRouge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Rouge" />
 
 </LinearLayout>
