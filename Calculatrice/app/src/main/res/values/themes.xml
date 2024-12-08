@@ -1,0 +1,10 @@
+<!-- res/values/theme.xml -->
+<resources>
+    <!-- Thème personnalisé -->
+    <style name="Theme.CALCULATRICE" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Personnalisation possible ici -->
+    </style>
+
+
+
+</resources>
