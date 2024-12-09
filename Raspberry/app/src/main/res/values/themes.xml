@@ -1,0 +1,7 @@
+<resources>
+    <!-- Thème personnalisé qui hérite de Theme.AppCompat -->
+    <style name="Theme.Raspberry" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Vous pouvez ajouter ici vos personnalisations, comme les couleurs -->
+
+    </style>
+</resources>
