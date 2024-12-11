@@ -12,11 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.raspberry.R
 import android.graphics.Color
 import android.widget.ImageView
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -46,12 +42,7 @@ class MainActivity : AppCompatActivity() {
         salledebainImage = findViewById(R.id.salledebainimage)
         garageImage = findViewById(R.id.garageimage)
 
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://67a59a64-6711-4258-a10f-363a62e3a180.mock.pstmn.io/") // URL de ton serveur mock
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
 
-        apiService = retrofit.create(ApiService::class.java)
 
 
         Chambre.setOnCheckedChangeListener { _,isChecked ->
@@ -68,7 +59,7 @@ class MainActivity : AppCompatActivity() {
                 myToast.setGravity(Gravity.CENTER, 0, 0) // Affiche le toast au centre
                 myToast.show()
             }
-            controlLight("Chambre",ledstate)
+
 
 
         }
