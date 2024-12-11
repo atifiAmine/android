@@ -7,12 +7,19 @@ import android.widget.ImageView
 import android.widget.Toast
 import android.widget.ToggleButton
 import androidx.appcompat.app.AppCompatActivity
+<<<<<<< HEAD
 import android.util.Log
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+=======
+import com.example.raspberry.R
+import android.graphics.Color
+import android.widget.ImageView
+
+>>>>>>> d7796696a0b6280499c45a89b2d6a71e4247f6d6
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,18 +48,21 @@ class MainActivity : AppCompatActivity() {
         salledebainImage = findViewById(R.id.salledebainimage)
         garageImage = findViewById(R.id.garageimage)
 
+<<<<<<< HEAD
         // Configuration de Retrofit
         val retrofit = Retrofit.Builder()
             .baseUrl("https://67a59a64-6711-4258-a10f-363a62e3a180.mock.pstmn.io/") // URL de ton serveur mock
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+=======
+>>>>>>> d7796696a0b6280499c45a89b2d6a71e4247f6d6
 
-        apiService = retrofit.create(ApiService::class.java)
 
         // Initialisation des écouteurs
         setupListeners()
     }
 
+<<<<<<< HEAD
     // Fonction pour initialiser les écouteurs de tous les boutons
     private fun setupListeners() {
         // Écouteur pour le ToggleButton Chambre
@@ -60,6 +70,25 @@ class MainActivity : AppCompatActivity() {
             val ledstate = if (isChecked) "on" else "off"
             chambreImage.setImageResource(if (isChecked) R.drawable.vert else R.drawable.rouge)
             controlLight("chambre", ledstate)
+=======
+        Chambre.setOnCheckedChangeListener { _,isChecked ->
+            var ledstate = if (isChecked) "on" else "off"
+            if (isChecked) {
+                chambreImage.setImageResource(R.drawable.vert)
+                val myToast = Toast.makeText(this, "Lumière allumée", Toast.LENGTH_SHORT)
+                myToast.setGravity(Gravity.CENTER, 0, 0) // Affiche le toast au centre
+                myToast.show()
+            } else {
+
+                chambreImage.setImageResource(R.drawable.rouge)// Change l'arrière-plan en bleu
+                val myToast = Toast.makeText(this, "Lumière éteinte", Toast.LENGTH_SHORT)
+                myToast.setGravity(Gravity.CENTER, 0, 0) // Affiche le toast au centre
+                myToast.show()
+            }
+
+
+
+>>>>>>> d7796696a0b6280499c45a89b2d6a71e4247f6d6
         }
 
         // Écouteur pour le ToggleButton Salon
