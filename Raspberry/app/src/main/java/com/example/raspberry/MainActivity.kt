@@ -11,13 +11,15 @@ import android.util.Log
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
 import kotlin.concurrent.thread
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
 
 class MainActivity : AppCompatActivity() {
 
@@ -60,14 +62,14 @@ class MainActivity : AppCompatActivity() {
         Chambre.setOnCheckedChangeListener { _, isChecked ->
             val ledstate = if (isChecked) "on" else "off"
             chambreImage.setImageResource(if (isChecked) R.drawable.vert else R.drawable.rouge)
-            sendHttpRequest("chambre", ledstate)
+            sendHttpRequestWithOkHttp("chambre", ledstate)
         }
 
         // Écouteur pour le ToggleButton Salon
         Salon.setOnCheckedChangeListener { _, isChecked ->
             val ledstate = if (isChecked) "on" else "off"
             salonImage.setImageResource(if (isChecked) R.drawable.vert else R.drawable.rouge)
-            sendHttpRequest("salon", ledstate)
+            sendHttpRequestWithOkHttp("salon", ledstate)
         }
 
         // Écouteur pour le ToggleButton Salle de Bain
@@ -75,7 +77,7 @@ class MainActivity : AppCompatActivity() {
             val ledstate = if (isChecked) "on" else "off"
             salledebainImage.setImageResource(if (isChecked) R.drawable.vert else R.drawable.rouge)
             val message = if (isChecked) "Lumière allumée" else "Lumière éteinte"
-            sendHttpRequest("salledebain", ledstate)
+            sendHttpRequestWithOkHttp("salledebain", ledstate)
             showToast(message)
 
         }
@@ -85,43 +87,38 @@ class MainActivity : AppCompatActivity() {
             val ledstate = if (isChecked) "on" else "off"
             garageImage.setImageResource(if (isChecked) R.drawable.vert else R.drawable.rouge)
             val message = if (isChecked) "Lumière allumée" else "Lumière éteinte"
-            sendHttpRequest("garage", ledstate)
+            sendHttpRequestWithOkHttp("garage", ledstate)
             showToast(message)
 
         }
     }
 
-    private fun sendHttpRequest(room: String, ledState: String) {
-        // Construire l'URL dynamique avec les paramètres room et led
+
+
+    private fun sendHttpRequestWithOkHttp(room: String, ledState: String) {
         val urlString = "http://172.16.16.8:1880/led?room=$room&led=$ledState"
+        val client = OkHttpClient()
+
+        val request = Request.Builder()
+            .url(urlString)
+            .build()
 
         // Exécuter la requête dans un thread en arrière-plan
         thread {
             try {
-                // Créer une URL à partir de la chaîne de caractères
-                val url = URL(urlString)
+                val response: Response = client.newCall(request).execute()
 
-                // Ouvrir une connexion HTTP
-                val connection = url.openConnection() as HttpURLConnection
-
-                // Configurer la méthode de la requête (GET)
-                connection.requestMethod = "GET"
-
-                // Envoyer la requête sans attendre de réponse
-                connection.connect()
-
-                // Déconnecter la connexion après l'envoi
-                connection.disconnect()
-
-                // Optionnellement, loguer la requête envoyée pour le débogage
-                Log.d("HttpRequest", "Requête envoyée pour la $room avec état $ledState")
-
+                if (response.isSuccessful) {
+                    Log.d("HttpRequest", "Requête réussie: ${response.body?.string()}")
+                } else {
+                    Log.e("HttpRequest", "Erreur de requête: ${response.code}")
+                }
             } catch (e: Exception) {
-                // Gérer les erreurs de connexion
-                Log.e("HttpRequest", "Erreur lors de l'envoi de la requête : ${e.message}")
+                Log.e("HttpRequest", "Erreur lors de l'envoi de la requête: ${e.message}")
             }
         }
     }
+
 
 
     // Fonction pour afficher un Toast au centre de l'écran
