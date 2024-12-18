@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  node-red:
+    build:
+      context: ./node-red/
+    container_name: node-red
+    ports:
+      - "1880:1880"            # Port de Node-RED
+    devices:
+      - "/dev/i2c-1:/dev/i2c-1"  # Accès au bus I2C de la Raspberry Pi
+    privileged: true
+    volumes:
+      - ./node-red/flows:/data # Flux Node-RED

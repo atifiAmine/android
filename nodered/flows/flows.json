@@ -1,0 +1,141 @@
+[
+    {
+        "id": "68e04d3fc7aa7481",
+        "type": "tab",
+        "label": "android",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "fed84228487d7b8d",
+        "type": "http in",
+        "z": "68e04d3fc7aa7481",
+        "name": "",
+        "url": "/led",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 100,
+        "y": 200,
+        "wires": [
+            [
+                "b1d1630821c1803d",
+                "16070620d0b1a9e9"
+            ]
+        ]
+    },
+    {
+        "id": "16070620d0b1a9e9",
+        "type": "function",
+        "z": "68e04d3fc7aa7481",
+        "name": "function 5",
+        "func": "// Extraire les paramètres 'room' et 'led' de la requête\nvar room = msg.req.query.room;\nvar ledState = msg.req.query.led;;\n\n// Logique pour contrôler la LED en fonction de la pièce et de l'état\nif (room === 'chambre') {\n    if (ledState === 'on') {\n        msg.payload = '1'; // Commande pour allumer la LED orange\n    } else {\n        msg.payload = 'o'; // Commande pour éteindre la LED orange\n    }\n} else if (room === 'salon') {\n    if (ledState === 'on') {\n        msg.payload = '2'; // Commande pour allumer la LED rouge\n    } else {\n        msg.payload = 'r'; // Commande pour éteindre la LED rouge\n    }\n} else if (room === 'salledebain') {\n    if (ledState === 'on') {\n        msg.payload = '3'; // Commande pour allumer la LED orange\n    } else {\n        msg.payload = 'b'; // Commande pour éteindre la LED orange\n    }\n} else if (room === 'garage') {\n    if (ledState === 'on') {\n        msg.payload = '4'; // Commande pour allumer la LED rouge\n    } else {\n        msg.payload = 'g'; // Commande pour éteindre la LED rouge\n    }\n} else {\n    msg.payload = 'Pièce ou état invalide';\n}\n\n// Retourner le message pour l'envoyer à l'Arduino\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 200,
+        "wires": [
+            [
+                "2cd481486dc47ffd",
+                "f2935dcf44cad2b5",
+                "2c426679c0d6c9cf"
+            ]
+        ]
+    },
+    {
+        "id": "2cd481486dc47ffd",
+        "type": "i2c out",
+        "z": "68e04d3fc7aa7481",
+        "name": "",
+        "busno": "1",
+        "address": "8",
+        "command": "",
+        "payload": "payload",
+        "payloadType": "msg",
+        "count": "1",
+        "x": 590,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b1d1630821c1803d",
+        "type": "debug",
+        "z": "68e04d3fc7aa7481",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 340,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "91c46f230b360a1f",
+        "type": "switch",
+        "z": "68e04d3fc7aa7481",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 300,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f2935dcf44cad2b5",
+        "type": "debug",
+        "z": "68e04d3fc7aa7481",
+        "name": "debug 9",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 520,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "2c426679c0d6c9cf",
+        "type": "i2c out",
+        "z": "68e04d3fc7aa7481",
+        "name": "",
+        "busno": "1",
+        "address": "9",
+        "command": "",
+        "payload": "payload",
+        "payloadType": "msg",
+        "count": "1",
+        "x": 590,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    }
+]
