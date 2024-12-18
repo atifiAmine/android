@@ -6,7 +6,7 @@ import retrofit2.http.Query
 
 interface ApiService {
     // Définir l'endpoint de ton API
-    @GET("index.php")
+    @GET("controlLight")
     fun controlLight(
         @Query("room") room: String,       // Paramètre pour la pièce
         @Query("led") ledState: String     // Paramètre pour l'état de la lumière (on/off)
