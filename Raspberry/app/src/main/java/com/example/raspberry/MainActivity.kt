@@ -8,6 +8,7 @@ import android.widget.Toast
 import android.widget.ToggleButton
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -46,9 +47,7 @@ class MainActivity : AppCompatActivity() {
         garageImage = findViewById(R.id.garageimage)
 
 
-
         // Configuration de Retrofit
-
 
 
         // Initialisation des écouteurs
@@ -91,10 +90,12 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
+
     private fun sendHttpRequest(room: String, ledState: String) {
         // Construire l'URL dynamique avec les paramètres room et led
-        val urlString =
-            "https://67a59a64-6711-4258-a10f-363a62e3a180.mock.pstmn.io/led?room=$room&led=$ledState"
+        val urlString = "http://172.16.16.8:1880/led?room=$room&led=$ledState"
+
+        // Exécuter la requête dans un thread en arrière-plan
         thread {
             try {
                 // Créer une URL à partir de la chaîne de caractères
@@ -105,33 +106,22 @@ class MainActivity : AppCompatActivity() {
 
                 // Configurer la méthode de la requête (GET)
                 connection.requestMethod = "GET"
-                connection.connectTimeout = 5000
-                connection.readTimeout = 5000
 
-                // Lire la réponse du serveur
-                val responseCode = connection.responseCode
+                // Envoyer la requête sans attendre de réponse
+                connection.connect()
 
-                if (responseCode == HttpURLConnection.HTTP_OK) {
-                    // Si la requête a réussi, lire la réponse
-                    val inputStream = connection.inputStream
-                    val reader = InputStreamReader(inputStream)
-                    val response = reader.readText()
-
-                    // Log la réponse pour le débogage
-                    Log.d("HttpRequest", "Réponse: $response")
-                } else {
-                    // Si la requête échoue, log l'erreur
-                    Log.e("HttpRequest", "Erreur de requête, code : $responseCode")
-                }
-
+                // Déconnecter la connexion après l'envoi
                 connection.disconnect()
+
+                // Optionnellement, loguer la requête envoyée pour le débogage
+                Log.d("HttpRequest", "Requête envoyée pour la $room avec état $ledState")
+
             } catch (e: Exception) {
-                // Gérer les erreurs
-                Log.e("HttpRequest", "Erreur : ${e.message}")
+                // Gérer les erreurs de connexion
+                Log.e("HttpRequest", "Erreur lors de l'envoi de la requête : ${e.message}")
             }
         }
     }
-
 
 
     // Fonction pour afficher un Toast au centre de l'écran
@@ -141,3 +131,7 @@ class MainActivity : AppCompatActivity() {
         myToast.show()
     }
 }
+
+
+
+    // Fonction pour afficher un Toast au centre de l'écran
